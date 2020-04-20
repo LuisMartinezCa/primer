@@ -1,0 +1,32 @@
+---
+title: "pruebairis"
+author: "Luis Martínez Castillo"
+date: "19 de abril de 2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message =  FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+```
+
+
+```{r echo=FALSE}
+library(tinytex)
+library(data.table)
+library(ggplot2)
+library(data.table)
+df <- data.table(iris)
+```
+
+la media del largo del petalo de la especia iris virginica es `r df[Species == "virginica",mean(Petal.Length), by = Species]`
+
+```{r echo=FALSE}
+df <- as.data.table(iris)
+df1 <- df[,mean(Petal.Length), by = Species]
+ggplot(df1, aes(x = as.factor(Species), y = V1))+
+  geom_bar(stat = "identity",position="stack")+
+  xlab('Especie')+ylab('Media')+ggtitle('media plantas')+theme(plot.title=element_text(lineheight = 2,face='bold'))
+
+```
